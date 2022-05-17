@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class Planet : MonoBehaviour
 {
+    MapButtons mapButtonsScript;
+
     float changeSpeed = 2.0f;
 
     //origin and maximum planet scale value
@@ -14,30 +16,46 @@ public class Planet : MonoBehaviour
     bool scaleDown = false;
 
     [Header("Which level will this planet load")]
-    [SerializeField] int levelNumber; 
+    [SerializeField] int levelNumber;
 
+    private void Start()
+    {
+        mapButtonsScript = FindObjectOfType<MapButtons>().GetComponent<MapButtons>();
+    }
 
     private void Update()
     {
-        ScalePlus(scaleUp);
-        ScaleMinus(scaleDown);
+        if(mapButtonsScript.topMenuOpen == false)
+        {
+            ScalePlus(scaleUp);
+            ScaleMinus(scaleDown);
+        }
     }
 
     private void OnMouseDown()
     {
-        SceneManager.LoadScene(levelNumber + 1);
+        if (mapButtonsScript.topMenuOpen == false)
+        {
+            SceneManager.LoadScene(levelNumber + 1);
+        }
     }
 
     private void OnMouseOver()
     {
-        scaleUp = true;
-        scaleDown = false;
+        if (mapButtonsScript.topMenuOpen == false)
+        {
+            scaleUp = true;
+            scaleDown = false;
+        } 
     }
 
     private void OnMouseExit()
     {
-        scaleUp = false;
-        scaleDown = true;
+        if (mapButtonsScript.topMenuOpen == false)
+        {
+            scaleUp = false;
+            scaleDown = true;
+        }
     }
 
     void ScalePlus(bool canScale)

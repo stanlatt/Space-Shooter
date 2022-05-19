@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
-public class Music : MonoBehaviour
+public class MenuMusic : MonoBehaviour
 {
 	AudioSource audioSource;
 	[SerializeField] float volumeVariable;
 
 	void Awake()
 	{
-		int numMusic = FindObjectsOfType<Music>().Length;
+		int numMusic = FindObjectsOfType<MenuMusic>().Length;
 
 		if (numMusic > 1)
 		{
@@ -30,6 +31,11 @@ public class Music : MonoBehaviour
     private void Update()
     {
 		audioSource.volume = volumeVariable;
+
+		if(SceneManager.GetActiveScene().buildIndex >= 2)
+        {
+			Destroy(gameObject);
+        }
 
 	}
 

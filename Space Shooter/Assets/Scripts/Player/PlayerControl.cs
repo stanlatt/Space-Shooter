@@ -68,13 +68,13 @@ public class PlayerControl : MonoBehaviour
                 SceneManager.LoadScene(1);
 
 
-				scoreScript = FindObjectOfType<Score>().GetComponent<Score>();
-				scoreToConvert = scoreScript.score;
+                scoreScript = FindObjectOfType<Score>().GetComponent<Score>();
+                scoreToConvert = scoreScript.score;
 
-				moneyAndScoreScript = FindObjectOfType<MoneyAndScore>().GetComponent<MoneyAndScore>();
-				moneyAndScoreScript.AddScoreToMoney(scoreToConvert);
+                moneyAndScoreScript = FindObjectOfType<MoneyAndScore>().GetComponent<MoneyAndScore>();
+                moneyAndScoreScript.AddScoreToMoney(scoreToConvert);
 
-				break;
+                break;
 		}
     }
 

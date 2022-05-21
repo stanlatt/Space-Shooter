@@ -18,9 +18,14 @@ public class Planet : MonoBehaviour
     [Header("Which level will this planet load")]
     [SerializeField] int levelNumber;
 
+    [Header("Planet click audiosource")]
+    public AudioSource planetClickAudiosource;
+
+
     private void Start()
     {
         mapButtonsScript = FindObjectOfType<MapButtons>().GetComponent<MapButtons>();
+        planetClickAudiosource = GameObject.Find("Planet choose sound").GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -29,13 +34,14 @@ public class Planet : MonoBehaviour
         {
             ScalePlus(scaleUp);
             ScaleMinus(scaleDown);
-        }
+        };
     }
 
     private void OnMouseDown()
     {
         if (mapButtonsScript.topMenuOpen == false)
         {
+            planetClickAudiosource.Play();
             SceneManager.LoadScene(levelNumber + 1);
         }
     }

@@ -26,10 +26,8 @@ public class MapMenuRotateShip : MonoBehaviour
         canFreeRotate = false;
 
         float X_axisRotation = Input.GetAxis("Mouse X") * rotaionSpeed;
-        float Y_axisRotation = Input.GetAxis("Mouse Y") * rotaionSpeed;
-
-        transform.Rotate(Vector3.down, X_axisRotation);
-        transform.Rotate(Vector3.left, Y_axisRotation);
+        transform.Rotate(Vector3.down, X_axisRotation, Space.World);
+        
     }
 
 

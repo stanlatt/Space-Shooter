@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MoneyAndScore : MonoBehaviour
 {
     TextMeshProUGUI moneyTextMenuMap;
+    TextMeshProUGUI moneyTextShop;
 
     [Header("-----Money-----")]
     public int money;
@@ -23,7 +24,10 @@ public class MoneyAndScore : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             moneyTextMenuMap = GameObject.Find("Money Text").GetComponent<TextMeshProUGUI>();
+            moneyTextShop = GameObject.Find("Money Text Shop").GetComponent<TextMeshProUGUI>();
+
             moneyTextMenuMap.text = "$" + money.ToString();
+            moneyTextShop.text = "$" + money.ToString();
 
         }
         

@@ -4,11 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class MapButtons : MonoBehaviour
 {
-    [Header("Two switchblade windows: mapMenu and shop")]
-    public GameObject mainPart;
-    public GameObject shopWindow;
-    bool mainPartActive;
-    bool shopWindowActive;
+    [Header("Camera switch reference")]
+    public Animator cameraSwitchAnimator;
 
     [Header("TopMenu references")]
     public Animator openCloseAnimator;
@@ -20,21 +17,15 @@ public class MapButtons : MonoBehaviour
     bool optionMenuActive;
 
 
-
     private void Start()
     {
         topMenuActive = true;
         topMenuOpen = false;
         optionMenuActive = false;
-
-        mainPartActive = true;
-        shopWindowActive = false; 
     }
 
     private void Update()
     {
-        mainPart.gameObject.SetActive(mainPartActive);
-        shopWindow.gameObject.SetActive(shopWindowActive);
 
         topMenu.gameObject.SetActive(topMenuActive);
         optionMenu.gameObject.SetActive(optionMenuActive);
@@ -42,19 +33,19 @@ public class MapButtons : MonoBehaviour
 
     public void Map_SHOP_ButtonClick()
     {
-        mainPartActive = !mainPartActive;
-        shopWindowActive = !shopWindowActive;
+        cameraSwitchAnimator.Play("MenuCameraSwitch_Right");
     }
     public void Shop_BACK_Button()
     {
-        mainPartActive = !mainPartActive;
-        shopWindowActive = !shopWindowActive;
+        cameraSwitchAnimator.Play("MenuCameraSwitch_Left");
     }
 
     
     public void TopMenu_OpenClose_ButtonClick()
     {
-        if(topMenuOpen == false)
+        Debug.Log("pressed");
+
+        if (topMenuOpen == false)
         {
             openCloseAnimator.Play("Open");
             topMenuOpen = true;
@@ -65,7 +56,7 @@ public class MapButtons : MonoBehaviour
             topMenuOpen = false;
         }
 
-        
+
     }
 
     public void TopMenu_Options_ButtonClick()

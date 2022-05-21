@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour {
 	
 	void AddNonTriggerCollider () {
 		Collider boxColider = gameObject.AddComponent<BoxCollider>();
-		boxColider.isTrigger = false;
 	}
 
 
@@ -26,8 +25,9 @@ public class Enemy : MonoBehaviour {
     {
 		scoreBoard.ScoreHit(scoreToAdd);
 		hits = hits - 1;
-		if(hits <= 0){
-		Death();
+		if(hits <= 0)
+		{
+			Death();
 		}
 	}
 

@@ -71,6 +71,8 @@ public class PlayerControl : MonoBehaviour
                 scoreScript = FindObjectOfType<Score>().GetComponent<Score>();
                 scoreToConvert = scoreScript.score;
 
+				Debug.Log("score converted localy - " + scoreScript.score);
+
                 moneyAndScoreScript = FindObjectOfType<MoneyAndScore>().GetComponent<MoneyAndScore>();
                 moneyAndScoreScript.AddScoreToMoney(scoreToConvert);
 
@@ -86,7 +88,7 @@ public class PlayerControl : MonoBehaviour
 	void OnPlayerDeath()
 	{
 		isControlEnabled = false;
-	}
+	} 
 
 
 

@@ -21,11 +21,18 @@ public class Planet : MonoBehaviour
     [Header("Planet click audiosource")]
     public AudioSource planetClickAudiosource;
 
+    [Header("Select ring object")]
+    public GameObject selectRing;
+
+    [Header("Planet text_1 animation")]
+    public Animator planetTextAnimator1;
 
     private void Start()
     {
         mapButtonsScript = FindObjectOfType<MapButtons>().GetComponent<MapButtons>();
         planetClickAudiosource = GameObject.Find("Planet choose sound").GetComponent<AudioSource>();
+
+        selectRing.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -50,6 +57,9 @@ public class Planet : MonoBehaviour
     {
         if (mapButtonsScript.topMenuOpen == false)
         {
+            selectRing.gameObject.SetActive(true);
+            planetTextAnimator1.Play("MapLevelTextShow");
+
             scaleUp = true;
             scaleDown = false;
         } 
@@ -59,6 +69,9 @@ public class Planet : MonoBehaviour
     {
         if (mapButtonsScript.topMenuOpen == false)
         {
+            selectRing.gameObject.SetActive(false);
+            planetTextAnimator1.Play("MapLevelTextHide");
+
             scaleUp = false;
             scaleDown = true;
         }

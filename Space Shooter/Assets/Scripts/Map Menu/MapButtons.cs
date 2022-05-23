@@ -16,9 +16,14 @@ public class MapButtons : MonoBehaviour
     public GameObject optionMenu;
     bool optionMenuActive;
 
+    //dark screen animator controller
+    Animator darkScreenAnimator;
 
     private void Start()
     {
+        darkScreenAnimator = GameObject.Find("Canvas for dark screen").GetComponent<Animator>();
+        darkScreenAnimator.Play("HideDark");
+
         topMenuActive = true;
         topMenuOpen = false;
         optionMenuActive = false;
@@ -73,6 +78,8 @@ public class MapButtons : MonoBehaviour
 
     public void TopMenu_Back_ButtonClick()
     {
+        darkScreenAnimator.Play("ShowDark");
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

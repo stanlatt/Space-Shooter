@@ -36,10 +36,15 @@ public class PlayerControl : MonoBehaviour
 	bool isControlEnabled = true;
 	float xMove,yMove;
 
+	//dark screen animator controller
+	Animator darkScreenAnimator;
+
 	private void Start()
     {
-		currentScene = SceneManager.GetActiveScene().buildIndex;
+		darkScreenAnimator = GameObject.Find("Canvas for dark screen").GetComponent<Animator>();
+		darkScreenAnimator.Play("HideDark");
 
+		currentScene = SceneManager.GetActiveScene().buildIndex;
 	}
 
     void Update () 
@@ -65,7 +70,9 @@ public class PlayerControl : MonoBehaviour
 				break;
 
 			case "FinishTrigger":
-                SceneManager.LoadScene(1);
+
+				darkScreenAnimator.Play("ShowDark");
+				Invoke("LoadMenu", 1);
 
 
                 scoreScript = FindObjectOfType<Score>().GetComponent<Score>();
@@ -79,6 +86,11 @@ public class PlayerControl : MonoBehaviour
                 break;
 		}
     }
+
+	void LoadMenu()
+    {
+		SceneManager.LoadScene(1);
+	}
 
 	void RestartLevel()
 	{

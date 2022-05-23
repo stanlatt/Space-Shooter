@@ -24,8 +24,16 @@ public class Planet : MonoBehaviour
     [Header("Select ring object")]
     public GameObject selectRing;
 
-    [Header("Planet text_1 animation")]
+    [Header("Planet text animation")]
     public Animator planetTextAnimator1;
+
+    [Header("Planet zoom animation")]
+    public Animator zoomInAnnimator;
+    bool canZoom;
+
+    //dark screen animator controller
+    Animator darkScreenAnimator;
+
 
     private void Start()
     {
@@ -33,6 +41,8 @@ public class Planet : MonoBehaviour
         planetClickAudiosource = GameObject.Find("Planet choose sound").GetComponent<AudioSource>();
 
         selectRing.gameObject.SetActive(false);
+
+        canZoom = true;
     }
 
     private void Update()
@@ -44,18 +54,42 @@ public class Planet : MonoBehaviour
         };
     }
 
+    void LoadLevel()
+    {
+        SceneManager.LoadScene(levelNumber + 1);
+    }
+
     private void OnMouseDown()
     {
         if (mapButtonsScript.topMenuOpen == false)
         {
+            darkScreenAnimator = GameObject.Find("Canvas for dark screen").GetComponent<Animator>();
+            darkScreenAnimator.Play("ShowDark");
+
             planetClickAudiosource.Play();
-            SceneManager.LoadScene(levelNumber + 1);
+
+            switch(levelNumber)
+            {
+                case 1:
+                    zoomInAnnimator.Play("ZoomPlanet1");
+                    break;
+
+                case 2:
+                    zoomInAnnimator.Play("ZoomPlanet2");
+                    break;
+
+                case 3:
+                    zoomInAnnimator.Play("ZoomPlanet3");
+                    break;
+            }
+            canZoom = false;
+            Invoke("LoadLevel", 1);
         }
     }
 
     private void OnMouseOver()
     {
-        if (mapButtonsScript.topMenuOpen == false)
+        if (mapButtonsScript.topMenuOpen == false && canZoom == true)
         {
             selectRing.gameObject.SetActive(true);
             planetTextAnimator1.Play("MapLevelTextShow");

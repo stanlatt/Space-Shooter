@@ -10,10 +10,16 @@ public class MenuManager : MonoBehaviour
     bool mainMenuActive;
     bool optionMenuActive;
 
+    //dark screen animator controller
+    Animator darkScreenAnimator;
+
     private void Start()
     {
         mainMenuActive = true;  //turning the main menu on
         optionMenuActive = false;  //turning the option menu off 
+
+        darkScreenAnimator = GameObject.Find("Canvas for dark screen").GetComponent<Animator>();
+        darkScreenAnimator.Play("HideDark");
     }
 
     private void Update()
@@ -25,6 +31,7 @@ public class MenuManager : MonoBehaviour
     //main menu PLAY button click
     public void MainMenuPLAYButtonClick()
     {
+        darkScreenAnimator.Play("ShowDark");
         SceneManager.LoadScene(1);
     }
 

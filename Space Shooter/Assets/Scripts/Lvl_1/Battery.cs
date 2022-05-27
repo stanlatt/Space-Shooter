@@ -9,12 +9,17 @@ public class Battery : MonoBehaviour
 	[SerializeField] GameObject innerCylinder;
 	[SerializeField] GameObject Cylinder;
 
+	PlayerControl playerControlScript;
+
 	bool alive;
+
+	
 
 
     private void Start()
     {
 		alive = true;
+		playerControlScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 
 		innerCylinder.GetComponent<Renderer>().material.color = Color.green;
 	}
@@ -39,6 +44,10 @@ public class Battery : MonoBehaviour
 	void BatteryDestroyed()
     {
 		alive = false;
+		playerControlScript.batteriesDestroyed++;
+		Debug.Log(playerControlScript.batteriesDestroyed);
+
+		Destroy(gameObject.GetComponent<BoxCollider>());
 
 		explosionFX.Play();
 		smokeFX.Play();

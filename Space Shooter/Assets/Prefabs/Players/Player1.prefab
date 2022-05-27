@@ -9869,6 +9869,7 @@ MonoBehaviour:
   xMoveRot: -20
   yMoveRot: 20
   zMoveRot: -30
+  batteriesDestroyed: 0
 --- !u!65 &420999415
 BoxCollider:
   m_ObjectHideFlags: 0

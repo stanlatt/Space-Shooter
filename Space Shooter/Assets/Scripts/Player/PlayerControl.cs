@@ -39,8 +39,13 @@ public class PlayerControl : MonoBehaviour
 	//dark screen animator controller
 	Animator darkScreenAnimator;
 
+	//batteries
+	public int batteriesDestroyed;
+
 	private void Start()
     {
+		batteriesDestroyed = 0;
+
 		darkScreenAnimator = GameObject.Find("Canvas for dark screen").GetComponent<Animator>();
 		darkScreenAnimator.Play("HideDark");
 
@@ -69,23 +74,66 @@ public class PlayerControl : MonoBehaviour
 
 				break;
 
+		}
+    }
+
+
+
+
+
+	private void OnTriggerEnter(Collider other)
+	{
+		switch (other.gameObject.tag)
+		{
+			case "Battery 1 Trigger":
+				if (batteriesDestroyed != 1)
+				{
+					DefeatOnTrigger();
+				}
+				break;
+
+			case "Battery 2 Trigger":
+				if (batteriesDestroyed != 2)
+				{
+					DefeatOnTrigger();
+				}
+				break;
+
+			case "Battery 3 Trigger":
+				if (batteriesDestroyed != 3)
+				{
+					DefeatOnTrigger();
+				}
+				break;
+
+
+
 			case "FinishTrigger":
 
 				darkScreenAnimator.Play("ShowDark");
-				Invoke("LoadMenu", 1);
+				Invoke("LoadMenu", LoadLevelDelay);
 
 
-                scoreScript = FindObjectOfType<Score>().GetComponent<Score>();
-                scoreToConvert = scoreScript.score;
+				scoreScript = FindObjectOfType<Score>().GetComponent<Score>();
+				scoreToConvert = scoreScript.score;
 
 				Debug.Log("score converted localy - " + scoreScript.score);
 
-                moneyAndScoreScript = FindObjectOfType<MoneyAndScore>().GetComponent<MoneyAndScore>();
-                moneyAndScoreScript.AddScoreToMoney(scoreToConvert);
+				moneyAndScoreScript = FindObjectOfType<MoneyAndScore>().GetComponent<MoneyAndScore>();
+				moneyAndScoreScript.AddScoreToMoney(scoreToConvert);
 
-                break;
+				break;
 		}
-    }
+	}
+
+	void DefeatOnTrigger()
+    {
+		Debug.Log("DEFEAT");
+		OnPlayerDeath();
+
+		darkScreenAnimator.Play("ShowDark");
+		Invoke("RestartLevel", LoadLevelDelay);
+	}
 
 	void LoadMenu()
     {

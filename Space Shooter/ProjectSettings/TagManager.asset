@@ -7,6 +7,10 @@ TagManager:
   - FinishTrigger
   - Obstacle
   - Enemy
+  - FxTemporaire
+  - Battery 1 Trigger
+  - Battery 2 Trigger
+  - Battery 3 Trigger
   layers:
   - Default
   - TransparentFX

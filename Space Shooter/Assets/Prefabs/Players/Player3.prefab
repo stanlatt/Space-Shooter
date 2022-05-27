@@ -142,6 +142,7 @@ MonoBehaviour:
   xMoveRot: -20
   yMoveRot: 20
   zMoveRot: -30
+  batteriesDestroyed: 0
 --- !u!1 &429603632149563099
 GameObject:
   m_ObjectHideFlags: 0

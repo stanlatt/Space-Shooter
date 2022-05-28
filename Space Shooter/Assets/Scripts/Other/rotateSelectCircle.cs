@@ -5,7 +5,7 @@ using UnityEngine;
 public class rotateSelectCircle : MonoBehaviour
 {
 
-    void Update()
+    void FixedUpdate()
     {
         transform.Rotate(0, 0, 1);
     }

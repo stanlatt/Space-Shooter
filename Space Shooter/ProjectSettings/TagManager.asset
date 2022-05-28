@@ -11,6 +11,9 @@ TagManager:
   - Battery 1 Trigger
   - Battery 2 Trigger
   - Battery 3 Trigger
+  - Ground
+  - Tree
+  - Brokable
   layers:
   - Default
   - TransparentFX

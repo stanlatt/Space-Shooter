@@ -6,8 +6,8 @@ public class RotatePlanet : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 0.1f;
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.Rotate(0, rotationSpeed, rotationSpeed);
+        transform.Rotate(0, rotationSpeed, rotationSpeed * Time.deltaTime);
     }
 }

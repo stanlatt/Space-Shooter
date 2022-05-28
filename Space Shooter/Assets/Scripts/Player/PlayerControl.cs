@@ -64,9 +64,21 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        switch(collision.gameObject.tag)
+        switch (collision.gameObject.tag)
         {
-			case "Obstacle":
+            case "Ground": // when player hits a ground
+
+                Debug.Log("Ground");
+
+                OnPlayerDeath();
+                explosionFX.SetActive(true);
+                Invoke("RestartLevel", LoadLevelDelay);
+
+                break;
+
+			case "Obstacle": // when player hits an obstacle
+
+				Debug.Log("Obstacle");
 
 				OnPlayerDeath();
 				explosionFX.SetActive(true);
@@ -74,14 +86,23 @@ public class PlayerControl : MonoBehaviour
 
 				break;
 
-		}
+			case "Tree": // when player hits a tree
+
+                Debug.Log("Tree");
+
+                OnPlayerDeath();
+                explosionFX.SetActive(true);
+                Invoke("RestartLevel", LoadLevelDelay);
+
+                break;
+        }
     }
 
 
 
 
 
-	private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
 	{
 		switch (other.gameObject.tag)
 		{
@@ -106,9 +127,11 @@ public class PlayerControl : MonoBehaviour
 				}
 				break;
 
+			
 
 
-			case "FinishTrigger":
+
+			case "FinishTrigger": // when player collides with finish trigger
 
 				darkScreenAnimator.Play("ShowDark");
 				Invoke("LoadMenu", LoadLevelDelay);
